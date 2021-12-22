@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="strong" class="diexam.StrongWindow"></bean>
+	<bean id="melon" class="diexam.MelonSpeaker"></bean>
+	
+	<bean id="green" class="diexam.GreenCar">
+		<property name="speaker" ref="melon"></property>
+		<property name="price" value="2000"></property>
+		<property name="window" ref="strong"></property>
+	</bean>
+	
+	<bean id="black" class="diexam.BlackCar"
+		c:speaker-ref="melon"
+		c:price="3000"
+		c:window-ref="strong"/>
+	
+</beans>
