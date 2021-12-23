@@ -7,11 +7,13 @@
 
 	<bean id="dao" class="MVC06.Mvc06Dao"/>
 
-<!-- 
+<!--
+	이건 생성될때 메개변수로 dao를 넣겠다 
 	<bean id="service" class="MVC06.Mvc06Service"
 		c:dao-ref="dao"/>
--->	
-		
+-->
+	
+<!-- 이건 생성된 후 setter를 이용하여 dao를 set하겠다. -->
 	<bean id ="service" class="MVC06.Mvc06Service"
 		p:dao-ref="dao"/>
 	
