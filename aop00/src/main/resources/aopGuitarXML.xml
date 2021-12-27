@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="gibson" class="aopGuitarXML.Guitar"/>
+	<bean id="ABBA" class="aopGuitarXML.Instrumentalist">
+		<property name="instrument" ref="gibson"></property>
+	</bean>
+	
+
+
+	<bean id="audience" class="aopGuitarXML.Audience"/>
+	<aop:config>
+		<aop:aspect id="myAspect" ref="audience">
+			<aop:pointcut id="performance" expression="execution(* aopGuitarXML.Performer.perform(..))"/>
+			<aop:before pointcut-ref="performance" method="takeSeats"/>
+			<aop:before pointcut-ref="performance" method="turnOffCellPhones"/>
+			<aop:after-returning pointcut-ref="performance" method="applaud"/>
+			<aop:after-throwing pointcut-ref="performance" method="demandRefund"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
