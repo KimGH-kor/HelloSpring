@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.MVC.Board.IDaoCst">
+
+	<select id="getUser" resultType="cst" parameterType="String">
+		SELECT * FROM CUSTOMER WHERE CODE = #{code}
+	</select>
+	
+	<!-- 
+	<resultMap type="mbrDto" id="rsMap">
+		<result property="id" column="id" />
+		<result property="pw" column="pw" />
+		<result property="name" column="name" />
+		<result property="tel" column="tel" />
+	</resultMap>
+	
+	<select id="selectAll" resultMap="rsMap">
+		SELECT * FROM MEMBER
+	</select>
+	
+	-->
+	<select id="getRow" resultType="String">
+		SELECT COUNT(ROWNUM) FROM CUSTOMER
+	</select>
+	
+	<select id="getUsers" resultType="cst">
+		select * from ( select rownum no, o.* 
+			   from ( select * 
+			   	 	  from customer 
+			   	 	  order by code) o ) 
+		where no &gt;= #{start} 
+		and rownum &lt;= 5
+	</select>
+	
+	<insert id="insertUser" parameterType="cst">
+		INSERT INTO CUSTOMER VALUES (#{code}, #{name}, #{email}, #{tel}, #{weight})
+	</insert>
+	
+	<update id="updateUser" parameterType="cst">
+		UPDATE CUSTOMER SET CODE = #{code}, NAME = #{name}, EMAIL = #{email}, TEL = #{tel}, WEIGHT = #{weight} WHERE CODE = #{code}
+	</update>
+	
+	<delete id="deleteUser">
+		DELETE FROM CUSTOMER WHERE CODE = #{code}
+	</delete>
+	
+	
+</mapper>
