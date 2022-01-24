@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.MVC.TestSpring.IDaoMbr">
+	
+	
+	<select id="getMbrs" resultType="mbrDto">
+		SELECT * FROM MBR ORDER BY CODE
+	</select>
+	
+	<select id="getMbr" resultType="mbrDto" parameterType="String">
+		SELECT * FROM MBR WHERE CODE = #{code}
+	</select>
+	
+	<insert id="insertMbr" parameterType="mbrDto">
+		INSERT INTO MBR VALUES (#{code}, #{name}, #{weight})
+	</insert>
+
+</mapper>
